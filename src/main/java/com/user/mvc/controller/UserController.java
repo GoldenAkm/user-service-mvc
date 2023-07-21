@@ -30,6 +30,23 @@ public class UserController {
         return userService.getAll();
     }
 
+    @GetMapping("/page")
+    public String getUserPage(){
+        return "users";
+    }
+    @GetMapping("/dashboard/page")
+    public String getDashboardPage(){
+        return "dashboard";
+    }
+    @GetMapping("/products")
+    public String getProductsPage(){
+        return "products";
+    }
+    @GetMapping("/orders")
+    public String getOrdersPage(){
+        return "orders";
+    }
+
     @PostMapping("")
     public String addUser(User user) {
         userService.addUser(user);
@@ -42,7 +59,7 @@ public class UserController {
 
         if (user != null && user.getPassword().equals(password)) {
             model.addAttribute("username", username);
-            return "admin-panel";
+            return "dashboard";
         } else {
             model.addAttribute("errorMessage", "Invalid username or password");
             return "index";
