@@ -5,12 +5,11 @@ import com.user.mvc.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapper {
-
+public class UserMapper { // TODO: Search about Mapstruct library
     public UserDto toUserDto(User user){
         var userDto = new UserDto();
         userDto.setUsername(user.getUsername());
-        userDto.setEmailaddress(user.getEmailaddress());
+        userDto.setEmailAddress(user.getEmailAddress());
         userDto.setPassword(user.getPassword());
         return userDto;
     }
@@ -19,7 +18,7 @@ public class UserMapper {
         var user = new User();
         user.setUsername(userDto.getUsername());
         user.setPassword(userDto.getPassword());
-        user.setEmailaddress(userDto.getEmailaddress());
+        user.setEmailAddress(userDto.getEmailAddress());
         return user;
     }
 

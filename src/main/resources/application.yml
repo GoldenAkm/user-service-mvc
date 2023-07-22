@@ -1,3 +1,7 @@
+logging:
+  level:
+    com.user.mvc: INFO
+
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -5,8 +9,9 @@ spring:
     username: root
     password: Museyib007
   jpa:
+    hibernate:
+      ddl-auto: validate
     database: mysql
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
-

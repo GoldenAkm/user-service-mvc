@@ -5,7 +5,7 @@ import com.user.mvc.entity.User;
 import com.user.mvc.mapper.UserMapper;
 import com.user.mvc.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
@@ -13,22 +13,15 @@ import org.springframework.ui.Model;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class UserService {
 
-    private UserRepository userRepository;
-
-    @Autowired
-    public UserService(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-
-    @Autowired
-    public UserMapper userMapper;
+    private final UserRepository userRepository;
+    private final UserMapper userMapper;
 
     public void getUserById(Long id, Model model) {
-
         User user = userRepository.findById(id).stream()
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException(
@@ -37,30 +30,29 @@ public class UserService {
         model.addAttribute("user", user);
     }
 
-    public List<UserDto> getAll(){
+    public List<UserDto> getAll() {
         return userRepository.findAll().stream()
-                .map(userMapper :: toUserDto).collect(Collectors.toList());
+                .map(userMapper::toUserDto)
+                .collect(Collectors.toList());
     }
-    public void addUser(User user){
+
+    public void addUser(User user) {
+        userRepository.save(user);
+        log.info("User has been saved to db with username: {}", user.getUsername());
+    }
+
+    public User getUserByEmailAddress(String username) {
+        return userRepository.findByUsername(username);
+    }
+
+    @Transactional
+    public void updateUser(UserDto userDto) {
+        User user = userMapper.toUser(userDto);
         userRepository.save(user);
     }
 
-    public User getUserByUsername(String username) {
-        return userRepository.findByUsername(username);
-
-    }
-
-
-    @Transactional
-    public void updateUser(Long id, UserDto userDto) {
-        User user = userMapper.toUser(userDto);
-        userRepository.update(id,
-                user.getUsername(),
-                user.getEmailaddress(),
-                user.getPassword());
-    }
-
-    public void deleteUserById(Long id){
+    public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
+
 }

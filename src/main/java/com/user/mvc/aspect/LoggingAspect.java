@@ -1,10 +1,12 @@
 package com.user.mvc.aspect;
 
+import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
 import org.springframework.stereotype.Component;
 
+@Slf4j
 @Aspect
 @Component
 public class LoggingAspect {
@@ -19,7 +21,7 @@ public class LoggingAspect {
 
     @Before("userServiceGetUserByIdMethod()")
     public void logBeforeServiceMethods() {
-        System.out.println("Before Request for getting user");
+        log.info("Before Request for getting user");
     }
 
     @After("userServiceGetUserByIdMethod()")
@@ -39,15 +41,7 @@ public class LoggingAspect {
 
     @Around("execution(* com.user.mvc.service.UserService.*(..))")
     public Object logAroundServiceMethods(ProceedingJoinPoint joinPoint) {
-        System.out.println("Around Requesting for getting user");
-
-        Object proceed = null;
-        try {
-            proceed = joinPoint.proceed();
-        } catch (Throwable e) {
-            System.out.println("There is a error with userService!!");
-        }
-        return proceed;
+        return null;
     }
 
     @AfterReturning("withinTransactionalMethods()")
