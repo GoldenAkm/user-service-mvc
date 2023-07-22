@@ -56,6 +56,7 @@ public class UserController {
         return "user-add";
     }
 
+
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model) {
         User user = userService.getUserByUsername(username);
