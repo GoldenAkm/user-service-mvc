@@ -56,7 +56,7 @@ public class UserService {
         User user = userMapper.toUser(userDto);
         userRepository.update(id,
                 user.getUsername(),
-                user.getEmailaddress(),
+                user.getEmailAddress(),
                 user.getPassword());
     }
 

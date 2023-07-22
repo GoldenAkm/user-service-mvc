@@ -13,7 +13,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     @Query(value = "SELECT u FROM users u WHERE u.username = :username")
     User findByUsername(@Param("username") String username);
 
-    @Query(value = "UPDATE users u set u.username=:username, u.emailaddress=:emailaddress, u.password=:password WHERE u.id=:id")
+    @Query(value = "UPDATE users u set u.username=:username, u.emailAddress=:emailaddress, u.password=:password WHERE u.id=:id")
     void update(Long id, String username, String emailaddress, String password);
 
 

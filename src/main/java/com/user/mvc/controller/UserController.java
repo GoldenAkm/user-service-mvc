@@ -2,7 +2,9 @@ package com.user.mvc.controller;
 
 import com.user.mvc.dto.UserDto;
 import com.user.mvc.entity.User;
+import com.user.mvc.mapper.UserMapper;
 import com.user.mvc.service.UserService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -11,14 +13,14 @@ import java.util.List;
 
 
 @Controller
+@RequiredArgsConstructor
 @RequestMapping("/users")
 public class UserController {
 
+    private final UserMapper userMapper;
+
     private final UserService userService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
-    }
 
     @GetMapping("/login")
     public String loginPage() {
@@ -47,8 +49,9 @@ public class UserController {
         return "orders";
     }
 
-    @PostMapping("")
-    public String addUser(User user) {
+    @PostMapping
+    public String addUser(UserDto userDto) {
+        User user = userMapper.toUser(userDto);
         userService.addUser(user);
         return "user-add";
     }

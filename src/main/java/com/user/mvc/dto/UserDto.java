@@ -9,7 +9,7 @@ public class UserDto {
     private String username;
 
     @Column(name = "email_address")
-    private String emailaddress;
+    private String emailAddress;
 
     private String password;
 }
