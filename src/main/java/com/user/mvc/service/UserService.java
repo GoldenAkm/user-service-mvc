@@ -27,16 +27,6 @@ public class UserService {
     @Autowired
     public UserMapper userMapper;
 
-    public void getUserById(Long id, Model model) {
-
-        User user = userRepository.findById(id).stream()
-                .findFirst()
-                .orElseThrow(() -> new RuntimeException(
-                        "User not found with given ID: " + id));
-
-        model.addAttribute("user", user);
-    }
-
     public List<UserDto> getAll(){
         return userRepository.findAll().stream()
                 .map(userMapper :: toUserDto).collect(Collectors.toList());
@@ -52,12 +42,9 @@ public class UserService {
 
 
     @Transactional
-    public void updateUser(Long id, UserDto userDto) {
+    public void updateUser(UserDto userDto) {
         User user = userMapper.toUser(userDto);
-        userRepository.update(id,
-                user.getUsername(),
-                user.getEmailAddress(),
-                user.getPassword());
+        userRepository.save(user);
     }
 
     public void deleteUserById(Long id){
