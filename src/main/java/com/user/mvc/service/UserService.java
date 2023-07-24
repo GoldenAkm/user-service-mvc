@@ -8,15 +8,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.ui.Model;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 public class UserService {
-
     private UserRepository userRepository;
 
     @Autowired
@@ -27,19 +24,18 @@ public class UserService {
     @Autowired
     public UserMapper userMapper;
 
-    public List<UserDto> getAll(){
+    public List<UserDto> getAll() {
         return userRepository.findAll().stream()
-                .map(userMapper :: toUserDto).collect(Collectors.toList());
+                .map(userMapper::toUserDto).collect(Collectors.toList());
     }
-    public void addUser(User user){
+
+    public void addUser(User user) {
         userRepository.save(user);
     }
 
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username);
-
     }
-
 
     @Transactional
     public void updateUser(UserDto userDto) {
@@ -47,7 +43,7 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public void deleteUserById(Long id){
+    public void deleteUserById(Long id) {
         userRepository.deleteById(id);
     }
 }

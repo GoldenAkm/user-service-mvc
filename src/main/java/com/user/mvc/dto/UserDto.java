@@ -6,6 +6,8 @@ import javax.persistence.Column;
 
 @Data
 public class UserDto {
+
+    @Column(unique = true, nullable = false)
     private String username;
 
     @Column(name = "email_address")

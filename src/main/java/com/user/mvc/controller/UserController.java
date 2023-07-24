@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/users")
@@ -20,7 +19,6 @@ public class UserController {
     private final UserMapper userMapper;
 
     private final UserService userService;
-
 
     @GetMapping("/login")
     public String loginPage() {
@@ -33,19 +31,22 @@ public class UserController {
     }
 
     @GetMapping("/page")
-    public String getUserPage(){
+    public String getUserPage() {
         return "users";
     }
+
     @GetMapping("/dashboard/page")
-    public String getDashboardPage(){
+    public String getDashboardPage() {
         return "dashboard";
     }
+
     @GetMapping("/products")
-    public String getProductsPage(){
+    public String getProductsPage() {
         return "products";
     }
+
     @GetMapping("/orders")
-    public String getOrdersPage(){
+    public String getOrdersPage() {
         return "orders";
     }
 
@@ -55,7 +56,6 @@ public class UserController {
         userService.addUser(user);
         return "user-add";
     }
-
 
     @PostMapping("/login")
     public String login(@RequestParam String username, @RequestParam String password, Model model) {
