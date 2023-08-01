@@ -5,7 +5,7 @@ import com.user.mvc.entity.User;
 import org.springframework.stereotype.Component;
 
 @Component
-public class UserMapper {
+public class UserMapper { // TODO: explore mapstruct and apply it to your project
 
     public UserDto toUserDto(User user) {
         var userDto = new UserDto();

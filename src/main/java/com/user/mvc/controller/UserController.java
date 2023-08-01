@@ -14,40 +14,21 @@ import java.util.List;
 @Controller
 @RequiredArgsConstructor
 @RequestMapping("/users")
-public class UserController {
+public class UserController { // TODO: create a single responsibility for each endpoint
 
     private final UserMapper userMapper;
-
     private final UserService userService;
 
-    @GetMapping("/login")
-    public String loginPage() {
-        return "index";
-    }
 
-    @GetMapping()
+
+    @GetMapping
     public List<UserDto> getUser() {
         return userService.getAll();
     }
 
     @GetMapping("/page")
     public String getUserPage() {
-        return "users";
-    }
-
-    @GetMapping("/dashboard/page")
-    public String getDashboardPage() {
-        return "dashboard";
-    }
-
-    @GetMapping("/products")
-    public String getProductsPage() {
-        return "products";
-    }
-
-    @GetMapping("/orders")
-    public String getOrdersPage() {
-        return "orders";
+        return "users/users";
     }
 
     @PostMapping
@@ -57,23 +38,9 @@ public class UserController {
         return "user-add";
     }
 
-    @PostMapping("/login")
-    public String login(@RequestParam String username, @RequestParam String password, Model model) {
-        User user = userService.getUserByUsername(username);
-
-        if (user != null && user.getPassword().equals(password)) {
-            model.addAttribute("username", username);
-            return "dashboard";
-        } else {
-            model.addAttribute("errorMessage", "Invalid username or password");
-            return "index";
-        }
-    }
-
     @DeleteMapping()
-    public void deleteUserById(Long id) {
+    public void deleteUserById(Long id) { // TODO: make it with username
         userService.deleteUserById(id);
     }
-
 
 }

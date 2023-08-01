@@ -9,4 +9,10 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: validate
+    open-in-view: true
+  liquibase:
+    change-log: classpath:config/liquibase/db.changelog-master.xml
+    enabled: true
 

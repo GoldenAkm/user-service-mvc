@@ -20,19 +20,19 @@ public class LoggingAspect {
 
     @Before("execution(* com.user.mvc.service.UserService.getUserByUsername(..))")
     public void logBeforeGetUserByUsernameMethod(JoinPoint joinPoint) {
-        log.info("A log before request for getUserByUsername method. Location is" + joinPoint.getTarget());
+        log.info("A log before request for getUserByUsername method. Location is: " + joinPoint.getTarget());
         joinPointArgs(joinPoint);
     }
 
     @Before("execution(* com.user.mvc.service.UserService.addUser(..))")
     public void logBeforeAddUserMethod(JoinPoint joinPoint) {
-        log.info("A log before request for addUser method. Location is " + joinPoint.getTarget());
+        log.info("A log before request for addUser method. Location is: " + joinPoint.getTarget());
         joinPointArgs(joinPoint);
     }
 
     @AfterThrowing("execution(* com.user.mvc.service.UserService.getUserByUsername(..))")
     public void logAfterThrowingGetUserByUsername(JoinPoint joinPoint) {
-        log.error("Exception thrown in getUserByUsername method. Location is" + joinPoint.getTarget());
+        log.error("Exception thrown in getUserByUsername method. Location is: " + joinPoint.getTarget());
         joinPointArgs(joinPoint);
     }
 

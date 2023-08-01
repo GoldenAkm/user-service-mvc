@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Dashboard</title>
+  <title>Admin Panel - Users</title>
   <style>
     body {
       margin: 0;
@@ -93,29 +93,48 @@
 <body>
 <header>
   <h1>Admin Panel</h1>
-  <a href="/" class="logout-btn">Logout</a>
+  <a href="/users/login" class="logout-btn">Logout</a>
 </header>
 
 <aside>
   <nav>
     <ul>
-      <li><a href="/users/dashboard/page" class="active">Dashboard</a></li>
-      <li><a href="/users/page">Users</a></li>
-      <li><a href="/users/products">Products</a></li>
-      <li><a href="/users/orders">Orders</a></li>
+      <li><a href="/dashboard/page" id="dashboard-tab">Dashboard</a></li>
+      <li><a href="/users/page" class="active">Users</a></li>
+      <li><a href="/products">Products</a></li>
+      <li><a href="/orders">Orders</a></li>
     </ul>
   </nav>
 </aside>
 
 <main>
   <section>
-    <h2>Welcome to the Admin Panel</h2>
-    <p>Manage your website efficiently.</p>
+    <h2>Users</h2>
+    <p>Welcome to the Users section of the admin panel.</p>
   </section>
 </main>
 
 <footer>
   <p>&copy; 2023 Admin Panel. All rights reserved.</p>
 </footer>
+
+<script>
+  // JavaScript code to handle tab switching
+  const dashboardTab = document.getElementById('dashboard-tab');
+  const usersTab = document.querySelector('nav li:nth-child(2) a');
+  const usersSection = document.querySelector('main section');
+
+  usersTab.addEventListener('click', () => {
+    dashboardTab.classList.remove('active');
+    usersTab.classList.add('active');
+    usersSection.style.display = 'block';
+  });
+
+  dashboardTab.addEventListener('click', () => {
+    usersTab.classList.remove('active');
+    dashboardTab.classList.add('active');
+    usersSection.style.display = 'none';
+  });
+</script>
 </body>
 </html>
